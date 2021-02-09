@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!--- by arek the welder-->
+<!--- 09 june 2019-->
+
+<body style="background-color:powderblue;"></body>
+<h2>TURBO BAR CALCULATOR v1.3</h2>
+<p style = "font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif,serif;font: size 20;px;font-style:italic;">
+	Hi Pav, you look Beautiful!
+ </p>
+</body>
+
+<form id="frm1">
+  SEGMENT LENGTH: <input type="text" id="len" value="" >mm<br>
+  BAR WIDTH: <input type="text" id="barw" value="19" >mm<br>
+  BAR NUMBER: <input type="text" id="barn" value=""><br>
+  PUNCH INCREASE: <input type="text" id="punch" value="0">mm<br>
+</form> 
+<br>
+
+
+<span title="Dont Click on Me!"><button onclick="myFunction()">CALCULATE</button></span>
+<p id="spacing"></p>
+
+<p id="CALC"></p>
+
+
+
+<script>
+function myFunction() {
+
+var len = document.getElementById("len").value;
+var barw = document.getElementById("barw").value;
+var barn = document.getElementById("barn").value;
+var punching = document.getElementById("punch").value;
+var barspaces = +barn + 1;
+var barspace = (len - (barw*barn))/barspaces;
+document.getElementById("spacing").innerHTML = "SPACING: " +barspace + "</br> </br>"
+
+document.write("<h2>TURBO BAR CALCULATOR v1.3</h2>")
+document.write("SEGMENT LENGTH: " + len +"mm </br>")
+document.write("BAR WIDTH: " + barw +"mm </br>")
+document.write("BAR NUMBER: "+ barn+ " </br>")
+document.write("PUNCH INCREASE: "+ punching+ "mm </br></br>")
+
+document.write("</br>")
+document.write("<b>SPACING: " + parseFloat(barspace).toFixed( 2 ) +"mm </br></br></b>")
+document.write("</br>");
+var text = "";
+var barpos = barspace;
+var barloop = barn +1;
+var i;
+
+
+document.write("<table border=1 width=300>");
+			document.write("<tr>")
+			document.write("<th> BAR </th>")
+			document.write("<th> LEFT </th>")
+			document.write("<th> CENTER </th>")
+			document.write("<th> RIGHT </th>")
+			if (punching !== "0" ) { document.write("<th> PUNCH  </th>")};
+			document.write("</tr>")	
+
+	for (i = 1; i < (+barn + 1); i++) {
+
+	
+			
+			document.write("<tr>")
+			document.write("<td>" + i + "</td>");
+			
+			document.write("<td>" + parseFloat(barpos).toFixed(2) + "</td>");
+			document.write("<td>" + parseFloat(barpos + barw/2).toFixed(2)) + "</td>";
+			document.write("<td>" + parseFloat(barpos + 2*(barw/2)).toFixed(2)) + "</td>";
+			if (punching !== "0" ) { 
+			document.write("<td>"+parseFloat(barpos - +punching).toFixed(2)+"</td>");
+			}
+			
+			document.write("</tr>");
+			barpos = +barpos + +(barw) + +barspace;
+			
+		
+		
+}
+document.write("</table>");
+document.write("</br>")
+document.write("NOW MAKE IT ASAP!!")
+
+}
+</script>
+
+</body>
+</html>
