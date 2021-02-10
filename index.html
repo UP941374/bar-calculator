@@ -14,6 +14,7 @@
 	  BAR WIDTH: <input type="text" class="myEditBox" id="barw" value="19" >mm<br>
 	  BAR NUMBER: <input type="text" class="myEditBox" id="barn" value=""><br>
 	  PUNCH INCREASE: <input type="text" class="myEditBox" id="punch" value="0">mm<br>
+		DECIMAL PRECISON: <input type="text" class="myEditBox" id="decimal" value="0"><br>
 	<button id="btncalculate" class="myButton"> CALCULATE </button>
 	<p id="spacing"></p>
 	<table id="result">
@@ -70,6 +71,10 @@
 	const btn = document.getElementById('btncalculate');
 	btn.addEventListener('click', calculate);
 
+	function roundHalf(num) {
+    return Math.round(num*2)/2;
+}
+
 function calculate() {
 	const pspacing = document.getElementById('spacing');
 	const table = document.getElementById('result');
@@ -77,6 +82,7 @@ function calculate() {
 	const barwbox = document.getElementById("barw");
 	const barnbox = document.getElementById("barn");
 	const punchbox = document.getElementById("punch");
+	const decbox = document.getElementById("decimal");
 
 	table.textContent = '';
 	table.style = 'border: 5px double blue;'
@@ -85,6 +91,8 @@ function calculate() {
 	let barw = parseFloat(barwbox.value);
 	let barn = parseFloat(barnbox.value);
 	let punching = parseFloat(punchbox.value);
+	let decpre = decbox.value;
+	console.log(decpre)
 
 	if (isNaN(punching)) {
 		punching = 0
@@ -128,13 +136,19 @@ function calculate() {
 				let punch = row.insertCell(-1);
 				bar.style = "font-weight: bold";
 				bar.textContent = i;
-				left.textContent = parseFloat(i*barspace+((i-1)*barw)).toFixed(2);
-				middle.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)).toFixed(2);
-				right.textContent = parseFloat(i*barspace+((i-1)*barw)+barw).toFixed(2);
+				if (decpre == 0 ) {
+					left.textContent = roundHalf(parseFloat(i*barspace+((i-1)*barw)).toFixed(2));
+					middle.textContent = roundHalf(parseFloat(i*barspace+((i-1)*barw)+(barw/2)).toFixed(2));
+					right.textContent = roundHalf(parseFloat(i*barspace+((i-1)*barw)+barw).toFixed(2));
+				} else {
+				left.textContent = parseFloat(i*barspace+((i-1)*barw)).toFixed(decpre);
+				middle.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)).toFixed(decpre);
+				right.textContent = parseFloat(i*barspace+((i-1)*barw)+barw).toFixed(decpre);
+			}
 				if (punching==0) {
 					punch.textContent = "-";
 				} else {
-					punch.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)-(i*punching)).toFixed(2);
+					punch.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)-(i*punching)).toFixed(decpre);
 				}
 			}
 		}
