@@ -1,93 +1,145 @@
+<!--- by Arek the Welder-->
+<!--- 09 june 2019-->
+<!--- v1.8T 10 feb 2021 -->
+
 <!DOCTYPE html>
 <html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+</head>
 <body>
-
-<!--- by arek the welder-->
-<!--- 09 june 2019-->
-
-<body style="background-color:powderblue;"></body>
-<h2>TURBO BAR CALCULATOR v1.3</h2>
-<p style = "font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif,serif;font: size 20;px;font-style:italic;">
-	Hi Pav, you look Beautiful!
- </p>
+	<h1>BAR CALCULATOR 1.8T</h1>
+	  SEGMENT LENGTH: <input type="text" class="myEditBox" id="len" value="" >mm<br>
+	  BAR WIDTH: <input type="text" class="myEditBox" id="barw" value="19" >mm<br>
+	  BAR NUMBER: <input type="text" class="myEditBox" id="barn" value=""><br>
+	  PUNCH INCREASE: <input type="text" class="myEditBox" id="punch" value="0">mm<br>
+	<button id="btncalculate" class="myButton"> CALCULATE </button>
+	<p id="spacing"></p>
+	<table id="result">
+	</table>
 </body>
 
-<form id="frm1">
-  SEGMENT LENGTH: <input type="text" id="len" value="" >mm<br>
-  BAR WIDTH: <input type="text" id="barw" value="19" >mm<br>
-  BAR NUMBER: <input type="text" id="barn" value=""><br>
-  PUNCH INCREASE: <input type="text" id="punch" value="0">mm<br>
-</form> 
-<br>
+<style>
+	body {
+		background-color:powderblue;
+		max-width: 400px;
+    margin: auto;
+    padding:1eM;"
+	}
 
+	.myButton {
+		background-color:#44c767;
+		border-radius:28px;
+		border:1px solid #18ab29;
+		display: block;
+    width: 125px;
+    margin: 15px auto;
+		cursor:pointer;
+		color:#ffffff;
+		font-family:Arial;
+		font-size:15px;
+		padding:16px 16px;
+		text-decoration:none;
+		text-shadow:0px 1px 0px #2f6627;
+	}
 
-<span title="Dont Click on Me!"><button onclick="myFunction()">CALCULATE</button></span>
-<p id="spacing"></p>
+	.myEditBox {
+     padding: 1px;
+		 margin: 6px 2px 6px 0;
+     font-size: 18px;
+     border-width: 2px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 10px;
+     box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+	 }
 
-<p id="CALC"></p>
-
-
+	 table,td,tr {
+		border-collapse: collapse;
+		text-align:center;
+		padding:15px;
+		margin:10px;
+		font-size: 15px;
+	 }
+</style>
 
 <script>
-function myFunction() {
+	const btn = document.getElementById('btncalculate');
+	btn.addEventListener('click', calculate);
 
-var len = document.getElementById("len").value;
-var barw = document.getElementById("barw").value;
-var barn = document.getElementById("barn").value;
-var punching = document.getElementById("punch").value;
-var barspaces = +barn + 1;
-var barspace = (len - (barw*barn))/barspaces;
-document.getElementById("spacing").innerHTML = "SPACING: " +barspace + "</br> </br>"
+function calculate() {
+	const pspacing = document.getElementById('spacing');
+	const table = document.getElementById('result');
+	const lenbox = document.getElementById("len");
+	const barwbox = document.getElementById("barw");
+	const barnbox = document.getElementById("barn");
+	const punchbox = document.getElementById("punch");
 
-document.write("<h2>TURBO BAR CALCULATOR v1.3</h2>")
-document.write("SEGMENT LENGTH: " + len +"mm </br>")
-document.write("BAR WIDTH: " + barw +"mm </br>")
-document.write("BAR NUMBER: "+ barn+ " </br>")
-document.write("PUNCH INCREASE: "+ punching+ "mm </br></br>")
+	table.textContent = '';
+	table.style = 'border: 5px double blue;'
 
-document.write("</br>")
-document.write("<b>SPACING: " + parseFloat(barspace).toFixed( 2 ) +"mm </br></br></b>")
-document.write("</br>");
-var text = "";
-var barpos = barspace;
-var barloop = barn +1;
-var i;
+	let len = parseFloat(lenbox.value);
+	let barw = parseFloat(barwbox.value);
+	let barn = parseFloat(barnbox.value);
+	let punching = parseFloat(punchbox.value);
 
+	if (isNaN(punching)) {
+		punching = 0
+		punchbox.value = 0;
+	}
 
-document.write("<table border=1 width=300>");
-			document.write("<tr>")
-			document.write("<th> BAR </th>")
-			document.write("<th> LEFT </th>")
-			document.write("<th> CENTER </th>")
-			document.write("<th> RIGHT </th>")
-			if (punching !== "0" ) { document.write("<th> PUNCH  </th>")};
-			document.write("</tr>")	
+	if (isNaN(len) || isNaN(barw ) || isNaN(barn)) {
+		pspacing.textContent = "Please enter numbers only!";
+	} else {
+		let barspace = (len - (barn*barw))/(barn+1);
 
-	for (i = 1; i < (+barn + 1); i++) {
+		if (barspace < 0 ) {
+			pspacing.textContent = "IMPOSSIBLE!";
+		} else {
+			pspacing.textContent = "Spacing: " + parseFloat(barspace).toFixed(2) + 'mm';
 
-	
-			
-			document.write("<tr>")
-			document.write("<td>" + i + "</td>");
-			
-			document.write("<td>" + parseFloat(barpos).toFixed(2) + "</td>");
-			document.write("<td>" + parseFloat(barpos + barw/2).toFixed(2)) + "</td>";
-			document.write("<td>" + parseFloat(barpos + 2*(barw/2)).toFixed(2)) + "</td>";
-			if (punching !== "0" ) { 
-			document.write("<td>"+parseFloat(barpos - +punching).toFixed(2)+"</td>");
+			let row = table.insertRow(-1);
+			row.style = "font-size:1.5eM; font-weight: bold"
+			let bar = row.insertCell(-1);
+			let left = row.insertCell(-1);
+			let middle = row.insertCell(-1);
+			let right = row.insertCell(-1);
+			let punch = row.insertCell(-1);
+			bar.textContent = "BAR";
+			left.textContent = "LEFT";
+			middle.textContent = "MIDDLE";
+			right.textContent = "RIGHT";
+			punch.textContent = 'PUNCH';
+
+			for (let i = 1; i<=barn; i++) {
+				let row = table.insertRow(-1);
+				if (i%2==0) {
+					row.style = "background-color: #powderblue"
+				} else {
+					row.style = "background-color: #dbdbd7"
+				}
+				let bar = row.insertCell(-1);
+				let left = row.insertCell(-1);
+				let middle = row.insertCell(-1);
+				let right = row.insertCell(-1);
+				let punch = row.insertCell(-1);
+				bar.style = "font-weight: bold";
+				bar.textContent = i;
+				left.textContent = parseFloat(i*barspace+((i-1)*barw)).toFixed(2);
+				middle.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)).toFixed(2);
+				right.textContent = parseFloat(i*barspace+((i-1)*barw)+barw).toFixed(2);
+				if (punching==0) {
+					punch.textContent = "-";
+				} else {
+					punch.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)-(i*punching)).toFixed(2);
+				}
 			}
-			
-			document.write("</tr>");
-			barpos = +barpos + +(barw) + +barspace;
-			
-		
-		
-}
-document.write("</table>");
-document.write("</br>")
-document.write("NOW MAKE IT ASAP!!")
-
-}
+		}
+	}
+};
 </script>
 
 </body>
