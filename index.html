@@ -9,6 +9,7 @@
   <meta content="utf-8" http-equiv="encoding">
 </head>
 <body>
+	<div width="75%">
 	<h1>BAR CALCULATOR 1.8T</h1>
 	  SEGMENT LENGTH: <input type="text" class="myEditBox" id="len" value="" >mm<br>
 	  BAR WIDTH: <input type="text" class="myEditBox" id="barw" value="19" >mm<br>
@@ -19,23 +20,28 @@
 	<p id="spacing"></p>
 	<table id="result">
 	</table>
+	</div>
 </body>
 
 <style>
 	body {
 		background-color:powderblue;
-		max-width: 400px;
-    margin: auto;
     padding:1eM;"
 	}
+
+	div {
+		max-width: 500px;
+		margin: auto;
+		justify-content: center;
+    align-items: center;
+		}
 
 	.myButton {
 		background-color:#44c767;
 		border-radius:28px;
 		border:1px solid #18ab29;
-		display: block;
     width: 125px;
-    margin: 15px auto;
+    margin: 15px;
 		cursor:pointer;
 		color:#ffffff;
 		font-family:Arial;
