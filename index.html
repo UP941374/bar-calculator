@@ -98,7 +98,6 @@ function calculate() {
 	let barn = parseFloat(barnbox.value);
 	let punching = parseFloat(punchbox.value);
 	let decpre = decbox.value;
-	console.log(decpre)
 
 	if (isNaN(punching)) {
 		punching = 0
@@ -154,7 +153,11 @@ function calculate() {
 				if (punching==0) {
 					punch.textContent = "-";
 				} else {
-					punch.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)-(i*punching)).toFixed(decpre);
+						if (decpre == 0){
+						punch.textContent = roundHalf(parseFloat(i*barspace+((i-1)*barw)+(barw/2)-(i*punching)).toFixed(2));
+					} else {
+						punch.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)-(i*punching)).toFixed(decpre);
+					}
 				}
 			}
 		}
