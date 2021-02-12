@@ -7,11 +7,12 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
+	<meta name="vieport" content="width=device-width", initial-scale=1>
 </head>
 <body>
-	<div width="75%">
+	<div width="80%">
 	<h1>BAR CALCULATOR 1.8T</h1>
-	  SEGMENT LENGTH: <input type="text" class="myEditBox" id="len" value="" >mm<br>
+	  SEGMENT LENGTH: <input type="text" class="myEditBox" id="len" value="">mm<br>
 	  BAR WIDTH: <input type="text" class="myEditBox" id="barw" value="19" >mm<br>
 	  BAR NUMBER: <input type="text" class="myEditBox" id="barn" value=""><br>
 	  PUNCH INCREASE: <input type="text" class="myEditBox" id="punch" value="0">mm<br>
@@ -22,7 +23,7 @@
 	    <option value="lmiddle">Left of Middle</option>
 			<option value="rmiddle">Right of Middle</option>
 	    <option value="right">Right of Right</option>
-  </select>
+  </select> <br>
 	<button id="btncalculate" class="myButton"> CALCULATE </button>
 	<p id="spacing"></p>
 	<table id="result">
@@ -62,6 +63,7 @@
      padding: 1px;
 		 margin: 6px 2px 6px 0;
      font-size: 18px;
+		 width: 100px;
      border-width: 2px;
      border-color: #CCCCCC;
      background-color: #FFFFFF;
