@@ -16,6 +16,13 @@
 	  BAR NUMBER: <input type="text" class="myEditBox" id="barn" value=""><br>
 	  PUNCH INCREASE: <input type="text" class="myEditBox" id="punch" value="0">mm<br>
 		DECIMAL PRECISON: <input type="text" class="myEditBox" id="decimal" value="0"><br>
+		OFFSET: <input type="text" class="myEditBox" id="offset" value="0">mm
+		<select class="myDropdown" id="offsetchoice">
+	    <option value="left">Left of Left</option>
+	    <option value="lmiddle">Left of Middle</option>
+			<option value="rmiddle">Right of Middle</option>
+	    <option value="right">Right of Right</option>
+  </select>
 	<button id="btncalculate" class="myButton"> CALCULATE </button>
 	<p id="spacing"></p>
 	<table id="result">
@@ -64,6 +71,19 @@
      box-shadow: 0px 0px 5px rgba(66,66,66,.75);
 	 }
 
+	 .myDropdown{
+		 padding: 1px;
+		 margin: 6px 2px 6px 0;
+     font-size: 18px;
+     border-width: 2px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 10px;
+     box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+	 }
+
 	 table,td,tr {
 		border-collapse: collapse;
 		text-align:center;
@@ -75,7 +95,9 @@
 
 <script>
 	const btn = document.getElementById('btncalculate');
+	const offsetchoicebox = document.getElementById("offsetchoice");
 	btn.addEventListener('click', calculate);
+	offsetchoicebox.addEventListener('change', calculate)
 
 	function roundHalf(num) {
     return Math.round(num*2)/2;
@@ -89,6 +111,8 @@ function calculate() {
 	const barnbox = document.getElementById("barn");
 	const punchbox = document.getElementById("punch");
 	const decbox = document.getElementById("decimal");
+	const offsetbox = document.getElementById("offset");
+
 
 	table.textContent = '';
 	table.style = 'border: 5px double blue;'
@@ -97,11 +121,18 @@ function calculate() {
 	let barw = parseFloat(barwbox.value);
 	let barn = parseFloat(barnbox.value);
 	let punching = parseFloat(punchbox.value);
+	let offset = parseFloat(offsetbox.value);
 	let decpre = decbox.value;
+	let offsetch = offsetchoicebox.value;
 
 	if (isNaN(punching)) {
-		punching = 0
+		punching = 0;
 		punchbox.value = 0;
+	}
+
+	if (isNaN(offset)) {
+		offset = 0;
+		offsetbox.value = 0;
 	}
 
 	if (isNaN(len) || isNaN(barw ) || isNaN(barn)) {
@@ -121,11 +152,13 @@ function calculate() {
 			let middle = row.insertCell(-1);
 			let right = row.insertCell(-1);
 			let punch = row.insertCell(-1);
+			let customoffset = row.insertCell(-1);
 			bar.textContent = "BAR";
 			left.textContent = "LEFT";
 			middle.textContent = "MIDDLE";
 			right.textContent = "RIGHT";
 			punch.textContent = 'PUNCH';
+			customoffset.textContent = 'OFFSET';
 
 			for (let i = 1; i<=barn; i++) {
 				let row = table.insertRow(-1);
@@ -139,6 +172,7 @@ function calculate() {
 				let middle = row.insertCell(-1);
 				let right = row.insertCell(-1);
 				let punch = row.insertCell(-1);
+				let customoffset = row.insertCell(-1);
 				bar.style = "font-weight: bold";
 				bar.textContent = i;
 				if (decpre == 0 ) {
@@ -150,6 +184,7 @@ function calculate() {
 				middle.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)).toFixed(decpre);
 				right.textContent = parseFloat(i*barspace+((i-1)*barw)+barw).toFixed(decpre);
 			}
+
 				if (punching==0) {
 					punch.textContent = "-";
 				} else {
@@ -159,6 +194,24 @@ function calculate() {
 						punch.textContent = parseFloat(i*barspace+((i-1)*barw)+(barw/2)-(i*punching)).toFixed(decpre);
 					}
 				}
+				if (offset==0) {
+					customoffset.textContent = "-";
+				} else {
+					customoffset.textContent = offsetch;
+
+					switch (offsetch) {
+						case "left": customoffset.textContent = Number(left.textContent) - offset;
+						break;
+						case "lmiddle": customoffset.textContent = Number(middle.textContent) - offset;
+						break;
+						case "rmiddle": customoffset.textContent = Number(middle.textContent) + offset;
+						break;
+						case "right": customoffset.textContent = Number(right.textContent) + offset;
+						break;
+
+					}
+				}
+
 			}
 		}
 	}
