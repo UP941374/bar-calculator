@@ -1,6 +1,7 @@
 const CACHE_NAME  = 'bar-calculator';
+const cacheWhitelist = ['bar-calculator'];
 
-let resourcesToCache = ["./", "./index.html"];
+let resourcesToCache = ["./", "./index.html", "index.html"];
 
 self.addEventListener("install", e=>{
     e.waitUntil(
@@ -18,7 +19,6 @@ self.addEventListener("fetch", e=>{
     );
 });
 
-const cacheWhitelist = ['bar-calculator'];
 self.addEventListener('activate', event => {
     event.waitUntil(
       caches.keys().then(cacheNames => {
