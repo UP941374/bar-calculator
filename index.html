@@ -11,12 +11,12 @@
 	<link rel="manifest" href="manifest.json">
 	<title> BAR CALCULATOR 1.8T </title>
 	<script>
-		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('/service-worker.js')
-		} else {
-			console.log('Service worker is not supported!')
-		};
-	</script>
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('/service-worker.js');
+    } else {
+      console.log("Service worker is not supported");
+    }
+  </script>
 </head>
 <body>
 	<div width="80%">
