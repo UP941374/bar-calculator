@@ -11,6 +11,7 @@
 	<meta name="theme-color" content="#1E003D"/>
 	<link rel="apple-touch-icon" href="/192.png">
 	<link rel="manifest" href="./manifest.json">
+	<html lang="en">
 	<title> BAR CALCULATOR 1.8T </title>
 	<script>
     if('serviceWorker' in navigator){
@@ -23,18 +24,30 @@
 <body>
 	<div width="80%">
 	<h1>BAR CALCULATOR 1.8T</h1>
-	  SEGMENT LENGTH: <input type="text" class="myEditBox" id="len" value="">mm<br>
-	  BAR WIDTH: <input type="text" class="myEditBox" id="barw" value="19" >mm<br>
-	  BAR NUMBER: <input type="text" class="myEditBox" id="barn" value=""><br>
-	  PUNCH INCREASE: <input type="text" class="myEditBox" id="punch" value="0">mm<br>
-		DECIMAL PRECISON: <input type="text" class="myEditBox" id="decimal" value="0"><br>
-		OFFSET: <input type="text" class="myEditBox" id="offset" value="0">mm
-		<select class="myDropdown" id="offsetchoice">
-	    <option value="left">Left of Left</option>
-	    <option value="lmiddle">Left of Middle</option>
-			<option value="rmiddle">Right of Middle</option>
-	    <option value="right">Right of Right</option>
-  </select> <br>
+	  <label>
+			SEGMENT LENGTH: <input type="text" class="myEditBox" id="len" value="">mm<br>
+		</label>
+		<label>
+	  	BAR WIDTH: <input type="text" class="myEditBox" id="barw" value="19" >mm<br>
+		</label>
+		<label>
+	  	BAR NUMBER: <input type="text" class="myEditBox" id="barn" value=""><br>
+		</label>
+		<label>
+	  	PUNCH INCREASE: <input type="text" class="myEditBox" id="punch" value="0">mm<br>
+		</label>
+		<label>
+			DECIMAL PRECISON: <input type="text" class="myEditBox" id="decimal" value="0"><br>
+		</label>
+		<label>
+			OFFSET: <input type="text" class="myEditBox" id="offset" value="0">mm
+			<select class="myDropdown" id="offsetchoice">
+		    <option value="left">Left of Left</option>
+		    <option value="lmiddle">Left of Middle</option>
+				<option value="rmiddle">Right of Middle</option>
+		    <option value="right">Right of Right</option>
+	  </select>
+	<label><br>
 	<button id="btncalculate" class="myButton"> CALCULATE </button>
 	<p id="spacing"></p>
 	<table id="result">
@@ -44,7 +57,7 @@
 
 <style>
 	body {
-		background-color:powderblue;
+		background-color:#87CEEB;
     padding:1eM;"
 	}
 
@@ -62,7 +75,7 @@
     width: 125px;
     margin: 15px;
 		cursor:pointer;
-		color:#ffffff;
+		color:#0A0A0A;
 		font-family:Arial;
 		font-size:15px;
 		padding:16px 16px;
