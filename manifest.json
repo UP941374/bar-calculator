@@ -1,7 +1,7 @@
 {
     "name": "Bar Calculator",
     "short_name": "Bar Calculator",
-    "start_url": "index.html",
+    "start_url": "/bar-calculator/",
     "background_color": "powderblue",
     "theme_color": "#1E003D",
     "icons": [
