@@ -1,7 +1,7 @@
 const CACHE_NAME  = 'bar-calculator';
 const cacheWhitelist = ['bar-calculator'];
 
-let resourcesToCache = ["./", "./index.html", "index.html"];
+let resourcesToCache = ["./", "./index.html"];
 
 self.addEventListener("install", e=>{
     e.waitUntil(
